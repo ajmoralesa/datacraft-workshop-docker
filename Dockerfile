@@ -1,18 +1,18 @@
 FROM python:3.7-slim
 
 # equivqlent to cd in unix shell
-WORKDIR /
+WORKDIR /app
 
 EXPOSE 8501
 
 # installation des requirements
-ADD ./requirements.txt /requirements.txt
+ADD ./requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt --no-cache-dir
 
-ADD ./css /css/
-ADD ./utils/ /utils/
-ADD ./models/ /models/
-ADD ./images/ /images/
+ADD ./css /app/css/
+ADD ./utils/ /app/utils/
+ADD ./models/ /app/models/
+ADD ./images/ /app/images/
 
 ADD datacraft.py /datacraft.py
 
