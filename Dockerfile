@@ -1,18 +1,19 @@
 FROM python:3.7-slim
 
-# On copie le local vers l'image du container
-ADD requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt --no-cache-dir
+# equivqlent to cd in unix shell
+WORKDIR /
 
-WORKDIR app/
-# Ajouter les fichiers nécessaires pour faire tourner l'app streamil
-ADD ./datacraft.py /app/datacraft.py 
-ADD ./images/ /app/images/
-ADD ./models/ /app/models/
-ADD ./utils/ /app/utils/
-ADD ./css/ /app/css/
+EXPOSE 8501
 
-EXPOSE 8501 
+# installation des requirements
+ADD ./requirements.txt /requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir
 
-CMD ["streamlit","run","/app/datacraft.py"]
+ADD ./css /css/
+ADD ./utils/ /utils/
+ADD ./models/ /models/
+ADD ./images/ /images/
 
+ADD datacraft.py /datacraft.py
+
+CMD  ["streamlit", "run", "/datacraft.py"]
